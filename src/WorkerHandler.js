@@ -271,8 +271,10 @@ function WorkerHandler(script, _options) {
       var id = response.id;
       var task = me.processing[id];
       if (task !== undefined) {
+       
         if (response.isEvent) {
           if (task.options && typeof task.options.on === 'function') {
+            this.lastTask=task;
             task.options.on(response.payload);
           }
         } else {
@@ -291,6 +293,12 @@ function WorkerHandler(script, _options) {
           }
           else {
             task.resolver.resolve(response.result);
+          }
+        }
+      }else if(this.lastTask){
+        if (response.isEvent) {
+          if (this.lastTask.options && typeof this.lastTask.options.on === 'function') {
+            this.lastTask.options.on(response.payload);
           }
         }
       }
