@@ -301,6 +301,12 @@ function WorkerHandler(script, _options) {
             this.lastTask.options.on(response.payload);
           }
         }
+      }else if(this.globalOn){
+        if (response.isEvent) {
+          if (this.globalOn) {
+            this.globalOn(response.payload);
+          }
+        }
       }
     }
   });
