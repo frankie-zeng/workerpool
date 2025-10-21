@@ -485,7 +485,11 @@ WorkerHandler.prototype.terminate = function (force, callback) {
           cleanup(new Error('worker already killed!'));
           return;
         }
-
+        if(this.worker.threadId==-1)
+        {
+          cleanup(new Error('worker already killed!'));
+          return;
+        }
         // child process and worker threads
         var cleanExitTimeout = setTimeout(function() {
           if (me.worker) {
