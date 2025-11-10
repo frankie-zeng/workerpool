@@ -196,21 +196,7 @@ function resolveForkOptions(opts) {
   });
 }
 
-/**
- * Converts a serialized error to Error
- * @param {Object} obj Error that has been serialized and parsed to object
- * @return {Error} The equivalent Error.
- */
-function objectToError (obj) {
-  var temp = new Error('')
-  var props = Object.keys(obj)
 
-  for (var i = 0; i < props.length; i++) {
-    temp[props[i]] = obj[props[i]]
-  }
-
-  return temp
-}
 
 function handleEmittedStdPayload(handler, payload) {
   // TODO: refactor if parallel task execution gets added
@@ -289,7 +275,7 @@ function WorkerHandler(script, _options) {
 
           // resolve the task's promise
           if (response.error) {
-            task.resolver.reject(objectToError(response.error));
+            task.resolver.reject(response.error);
           }
           else {
             task.resolver.resolve(response.result);
