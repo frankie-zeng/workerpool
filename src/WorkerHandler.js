@@ -307,8 +307,8 @@ function WorkerHandler(script, _options) {
       }
     }
     me.processing = Object.create(null);
-    if(this.errorHandler){
-      this.errorHandler(error);
+    if(me.errorHandler){
+      me.errorHandler(error);
     }
   }
 
