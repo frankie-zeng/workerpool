@@ -307,6 +307,9 @@ function WorkerHandler(script, _options) {
       }
     }
     me.processing = Object.create(null);
+    if(this.errorHandler){
+      this.errorHandler(error);
+    }
   }
 
   // send all queued requests to worker
